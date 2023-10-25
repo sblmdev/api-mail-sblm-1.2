@@ -1,0 +1,16 @@
+package pe.gob.pj.api.mail.exception;
+
+/**
+ * Created by CSERRANOCA on 19/05/2015.
+ */
+public class MailException extends Exception {
+	private static final long serialVersionUID = 6388464682177215737L;
+
+	public MailException(String mensaje) {
+		super(mensaje);
+	}
+
+	public MailException(String mensaje, Throwable throwable) {
+		super(mensaje, throwable);
+	}
+}

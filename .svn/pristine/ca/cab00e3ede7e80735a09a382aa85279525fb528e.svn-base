@@ -1,0 +1,12 @@
+package pe.gob.pj.api.mail.util;
+
+/**
+ * Created by CSERRANOCA on 19/05/2015.
+ */
+public class Constantes {
+	public static final String RECURSO_MAIL_HOST = "mail.host";
+	public static final String RECURSO_MAIL_PROTOCOLO = "mail.transport.protocol";
+	public static final String RECURSO_MAIL_PORT = "mail.smtp.port";
+	public static final String RECURSO_MAIL_EMISOR = "mail.smtp.mail.sender";
+	public static final String RECURSO_MAIL_LOCALHOST = "mail.smtp.localhost";
+}

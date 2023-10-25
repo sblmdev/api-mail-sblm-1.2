@@ -1,0 +1,15 @@
+package pe.gob.pj.api.mail.stmp;
+
+import java.util.List;
+import javax.mail.MessagingException;
+import pe.gob.pj.api.mail.properties.MessageProperties;
+
+/**
+ * Created by CSERRANOCA on 19/05/2015.
+ */
+
+public interface Mail {
+	public void send(MessageProperties messageProperties) throws Exception, MessagingException;
+
+	public void send(MessageProperties messageProperties, List<String> filesAttach) throws Exception, MessagingException;
+}

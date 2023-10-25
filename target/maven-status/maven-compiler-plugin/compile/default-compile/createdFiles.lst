@@ -1,0 +1,11 @@
+pe\gob\sblm\api\mail\stmp\Mail.class
+pe\gob\sblm\api\mail\properties\MessageProperties.class
+pe\gob\sblm\api\mail\util\FileAttach.class
+pe\gob\sblm\api\mail\stmp\defaults\MailImpl.class
+pe\gob\sblm\api\mail\exception\MailException.class
+pe\gob\sblm\api\mail\type\MailNotificacionCedulaType.class
+pe\gob\sblm\api\mail\properties\MailProperties.class
+pe\gob\sblm\api\mail\type\ConfiguracionSMTPType.class
+pe\gob\sblm\api\mail\util\Constantes.class
+pe\gob\sblm\api\mail\util\MessageError.class
+pe\gob\sblm\api\mail\stmp\MailBuilder.class

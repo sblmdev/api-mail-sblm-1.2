@@ -1,0 +1,25 @@
+package pe.gob.sblm.api.mail.type;
+
+/**
+ * Created by CSERRANOCA on 08/09/2015.
+ */
+public enum MailNotificacionCedulaType {
+
+																				TBL_MAIL_NOTIFICACION_CEDULA("TBL_MAIL_NOTIFICACION_CEDULA"),
+																				MAIL_NOTIF_ASUNTO("MAIL_NOTIF_ASUNTO"),
+																				MAIL_NOTIF_CONTENIDO("MAIL_NOTIF_CONTENIDO");
+
+	private String value;
+
+	private MailNotificacionCedulaType(String value) {
+		this.value = value;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+}

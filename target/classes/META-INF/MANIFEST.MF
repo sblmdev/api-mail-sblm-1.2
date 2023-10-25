@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Built-By: Marco
+Class-Path: lib/jsse-2.1.0.jar lib/ssl-proxies-2.1.0.jar lib/commons-l
+ ogging-1.1.1.jar lib/bcprov-jdk15on-1.50.jar lib/commons-io-1.4.jar l
+ ib/commons-codec-1.4.jar lib/mail-1.4.7.jar lib/activation-1.1.jar li
+ b/api-commons-sblm-1.0.jar lib/slf4j-log4j12-1.7.5.jar lib/slf4j-api-
+ 1.7.5.jar lib/log4j-1.2.16.jar lib/joda-time-2.8.jar lib/commons-lang
+ -2.6.jar lib/spring-web-4.0.5.RELEASE.jar lib/spring-aop-4.0.5.RELEAS
+ E.jar lib/aopalliance-1.0.jar lib/spring-beans-4.0.5.RELEASE.jar lib/
+ spring-context-4.0.5.RELEASE.jar lib/spring-expression-4.0.5.RELEASE.
+ jar lib/spring-core-4.0.5.RELEASE.jar lib/gson-2.3.1.jar
+Build-Jdk: 1.8.0_202
+Created-By: Maven Integration for Eclipse
+

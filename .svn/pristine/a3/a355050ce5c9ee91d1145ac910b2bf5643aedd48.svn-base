@@ -1,0 +1,111 @@
+package pe.gob.pj.api.mail.stmp.defaults;
+
+import pe.gob.pj.api.mail.properties.MessageProperties;
+import pe.gob.pj.api.mail.stmp.Mail;
+import java.util.Date;
+import java.util.List;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
+/**
+ * Created by CSERRANOCA on 19/05/2015.
+ */
+public class MailImpl implements Mail {
+
+	private final Session session;
+	private final MimeMessage message;
+	private final String emisor;
+	private final String emisorNombre;
+
+	public MailImpl(Session session, String emisor) {
+		this.emisor = emisor;
+		this.session = session;
+		this.emisorNombre = ".";
+		this.message = new MimeMessage(this.session);
+	}
+
+	public MailImpl(Session session, String emisor, String emisorNombre) {
+		this.emisor = emisor;
+		this.session = session;
+		this.emisorNombre = emisorNombre;
+		this.message = new MimeMessage(this.session);
+	}
+
+	@Override
+	public void send(MessageProperties messageProperties) throws Exception, MessagingException {
+		// try {
+		String destinatarios = messageProperties.getDestinatarios();
+		message.setSubject(messageProperties.getAsunto());
+		message.setContent(messageProperties.getContenido(), "text/html; charset=utf-8");
+		if (emisorNombre.trim().equals(".")) {
+			message.setFrom(new InternetAddress(this.emisor));
+		} else
+			message.setFrom(new InternetAddress(this.emisor, this.emisorNombre));
+		if (destinatarios.indexOf(',') > 0) {
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatarios));
+		} else {
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(destinatarios));
+		}
+
+		Transport.send(message);
+		// } catch (MessagingException e) {
+		// throw new MailException(e.getMessage(), e.getCause());
+		// } catch (Exception e){
+		// throw new MailException(e.getMessage(), e.getCause());
+		// }
+	}
+
+	private void addAttachment(Multipart multipart, String filename) throws MessagingException {
+		DataSource source = new FileDataSource(filename);
+		BodyPart messageBodyPart = new MimeBodyPart();
+		messageBodyPart.setDataHandler(new DataHandler(source));
+		messageBodyPart.setFileName(filename);
+		multipart.addBodyPart(messageBodyPart);
+	}
+
+	@Override
+	public void send(MessageProperties messageProperties, List<String> filesAttach) throws Exception, MessagingException {
+		// try {
+		String destinatarios = messageProperties.getDestinatarios();
+		message.setSubject(messageProperties.getAsunto(), "utf-8");
+		//		message.setContent(messageProperties.getContenido(), "text/html; charset=utf-8");
+		MimeMultipart multipart = new MimeMultipart();
+		BodyPart texto = new MimeBodyPart();
+		texto.setContent(messageProperties.getContenido(), "text/html; charset=UTF-8");
+		multipart.addBodyPart(texto);
+		//		message.setContent(multipart);
+		if (emisorNombre.trim().equals(".")) {
+			message.setFrom(new InternetAddress(this.emisor));
+		} else
+			message.setFrom(new InternetAddress(this.emisor, this.emisorNombre));
+		if (destinatarios.indexOf(',') > 0) {
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatarios));
+		} else {
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(destinatarios));
+		}
+		for (String s : filesAttach) {
+			addAttachment(multipart, s);
+			//							System.out.println(s);
+		}
+		//						System.out.println(multipart.getCount());
+		message.setContent(multipart);
+		message.setSentDate(new Date());
+		Transport.send(message);
+		// } catch (MessagingException e) {
+		// throw new MailException(e.getMessage(), e.getCause());
+		// } catch (Exception e){
+		// throw new MailException(e.getMessage(), e.getCause());
+		// }
+	}
+}

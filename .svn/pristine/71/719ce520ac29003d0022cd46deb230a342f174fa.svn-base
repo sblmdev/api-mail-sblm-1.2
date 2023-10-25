@@ -1,0 +1,122 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>pe.gob.pj.api.mail</groupId>
+	<artifactId>api-mail-pj</artifactId>
+
+	<version>1.2</version>
+	<packaging>jar</packaging>
+
+	<name>api-mail-pj</name>
+	<url>http://maven.apache.org</url>
+
+	<organization>
+		<name>poder-judicial</name>
+		<url>http://www.pj.gob.pe</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>SGDSI Software License, Version 1.0</name>
+			<url>http://www.pj.gob.pe</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<id>caserrano</id>
+			<name>Carlos Serrano</name>
+			<email>caserrano@pj.gob.pe</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<java.version>1.7</java.version>
+
+		<junit.version>4.11</junit.version>
+
+		<org.maven.compiler.plugin.version>3.0</org.maven.compiler.plugin.version>
+		<org.maven.surefire.plugin.version>2.12</org.maven.surefire.plugin.version>
+		<org.maven.jar.plugin.version>2.4</org.maven.jar.plugin.version>
+		<org.maven.eclipse.plugin.version>2.9</org.maven.eclipse.plugin.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jglobus</groupId>
+			<artifactId>jsse</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>pe.gob.pj.api.commons</groupId>
+			<artifactId>api-commons-pj</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Force Java 7 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${org.maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>${org.maven.eclipse.plugin.version}</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+				</configuration>
+			</plugin>
+
+			<!-- JUnit ignore environment variable MAVEN_OPTS, you must use SUREFIRE-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${org.maven.surefire.plugin.version}</version>
+				<configuration>
+					<forkMode>pertest</forkMode>
+					<argLine>-Xms1024m -Xmx1024m</argLine>
+					<testFailureIgnore>false</testFailureIgnore>
+					<skip>false</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${org.maven.jar.plugin.version}</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<!-- don't know if this is needed -->
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

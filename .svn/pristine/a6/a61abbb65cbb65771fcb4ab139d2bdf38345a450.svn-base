@@ -1,0 +1,46 @@
+package pe.gob.pj.api.mail;
+
+//import org.junit.Test;
+import pe.gob.pj.api.mail.properties.MessageProperties;
+import pe.gob.pj.api.mail.exception.MailException;
+import pe.gob.pj.api.mail.properties.MailProperties;
+import pe.gob.pj.api.mail.stmp.Mail;
+import pe.gob.pj.api.mail.stmp.MailBuilder;
+
+/**
+ * Unit test for simple App.
+ */
+public class AppTest {
+
+//	@Test
+	public void sendMail() {
+		System.out.println("Enviando Mensaje...");
+		MailProperties mailProperties = new MailProperties();
+
+		mailProperties.setSmtpIp("172.19.0.176");
+		mailProperties.setSmtpProtocolo("smtp");
+		mailProperties.setSmtpPuerto("25");
+		mailProperties.setSmtpLocalHost("sinoe.pj.gob.pe");
+		mailProperties.setSmtpCorreoEmisor("sinoe@pj.gob.pe");
+		try {
+			MailBuilder mailBuilder = new MailBuilder();
+			Mail mail;
+			mail = mailBuilder.build(mailProperties);
+
+			MessageProperties messageProperties = new MessageProperties();
+
+			messageProperties.setAsunto("Esto es un prueba desde la API Mail PJ");
+			messageProperties.setContenido("<b>Estimado</b><br/>Esto es una prueba");
+			// messageProperties.setDestinatario("cserranoca@pj.gob.pe");
+			messageProperties.setDestinatarios("aasencio@pj.gob.pe,ocorimanyar@pj.gob.pe,aasencio@pj.gob.pe");
+			mail.send(messageProperties);
+		} catch (MailException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Mensaje enviado con exito");
+	}
+}
